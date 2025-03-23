@@ -3,21 +3,25 @@ import http from "http";
 import cors from "cors";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
+import docxRoutes from "./routes/docx.js";  // Import DOCX route
 
-dotenv.config();  // Load environment variables
+dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",  // Allow frontend to connect
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
 
 app.use(cors());
 app.use(express.json());
+
+// Use the DOCX processing route
+app.use("/docx", docxRoutes);
 
 app.get("/", (req, res) => {
   res.send("Collaborative Editor Backend is Running!");
@@ -36,4 +40,3 @@ const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-

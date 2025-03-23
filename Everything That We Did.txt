@@ -1,0 +1,10 @@
+Softwares Installed
+Postman
+Node.js
+
+Frontend
+Tailwind - Fixed Css
+
+Server
+npm install multer
+npm install mammoth
