@@ -1,3 +1,5 @@
+"use client";  // <-- Add this line
+
 import { useState } from "react";
 
 export default function DocxUploader() {
@@ -10,18 +12,18 @@ export default function DocxUploader() {
 
   const handleUpload = async () => {
     if (!file) return alert("Please select a .docx file to upload");
-    
+
     const formData = new FormData();
     formData.append("file", file);
-    
+
     try {
       const response = await fetch("http://localhost:5000/upload", {
         method: "POST",
         body: formData,
       });
-      
+
       if (!response.ok) throw new Error("Failed to upload file");
-      
+
       const data = await response.json();
       setHtmlContent(data.html);
     } catch (error) {
